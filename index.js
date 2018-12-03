@@ -15,10 +15,15 @@ async function createCours() {
     const course = new Course({
         name: 'Angular',
         author: 'Anand',
-        tags : ['angular','fromntend'],
-        isPublished : true
+        tags: ['angular', 'fromntend'],
+        isPublished: true
     });
     const result = await course.save();
     console.log(result);
-    }
-    createCours();
+}
+// createCours();
+async function getCourses() {
+    const courses = await Course.find({ author: 'Anand', isPublished: true }).limit(10).sort({ name: 1 }).select({ name: 1, tags: 1 });
+    console.log(courses);
+}
+getCourses();
